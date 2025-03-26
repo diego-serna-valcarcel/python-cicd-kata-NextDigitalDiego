@@ -18,5 +18,5 @@ jobs:
 
       - name: Run Ruff for formatting and linting
         run: |
-          uv ruff format .
+          uv run ruff format .
           uv ruff check --fix .
