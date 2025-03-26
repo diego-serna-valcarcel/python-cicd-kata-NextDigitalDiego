@@ -1,18 +1,22 @@
 name: GitHub Actions Demo
 run-name: python CICD KATA
 on: [push]
+
 jobs:
-  code quality:
-    runs-on: Ubuntu-latest
+  code_quality:
+    runs-on: ubuntu-latest
     steps:
-     - uses: actions/checkout@v3
-     - name: install uv
-       uses: astral-sh/setup-uv@v5
-     - name: "Set up Python"
-       uses: actions/setup-python@v5
-       with:
-        python-version-file: "pyproject.toml"
-     - run: uv ruff format .
+      - uses: actions/checkout@v3
 
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: "pyproject.toml"
 
+      - name: Run Ruff for formatting and linting
+        run: |
+          uv ruff format .
+          uv ruff check --fix .
